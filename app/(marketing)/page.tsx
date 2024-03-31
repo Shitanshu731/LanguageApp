@@ -14,7 +14,7 @@ export default function Home() {
         <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center ">
             Learn, Practise and master new languages with Lingo.
         </h1>
-        <div>
+        <div className="w-full items-center flex flex-col gap-3">
           <ClerkLoading>
             <Loader className="h-5 w-5 animate-spin text-muted-foreground"/>
           </ClerkLoading>
