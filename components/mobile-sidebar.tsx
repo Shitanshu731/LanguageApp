@@ -11,7 +11,6 @@ export const MobileSidebar = () => {
         <Sheet>
             <SheetTrigger>
                 <Menu className="text-white" />
-
             </SheetTrigger>
             <SheetContent className="p-0 z-[100]" side="left">
                 <Sidebar />
