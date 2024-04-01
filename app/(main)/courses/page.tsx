@@ -1,6 +1,6 @@
 import { getCourses } from '@/db/query'
-import { List } from 'lucide-react'
 import React from 'react'
+import { List } from './list';
 
 const page = async() => {
     const data = await getCourses();
@@ -9,6 +9,7 @@ const page = async() => {
         <h1 className='text-2xl font-bold text-neutral-700 '>
             Language Courses
         </h1>
+        <List courses={data} activeCourseId={1}/>
         {JSON.stringify(data)}
     </div>
   )
