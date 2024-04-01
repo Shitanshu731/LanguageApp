@@ -10,7 +10,6 @@ const page = async() => {
             Language Courses
         </h1>
         <List courses={data} activeCourseId={1}/>
-        {JSON.stringify(data)}
     </div>
   )
 }
