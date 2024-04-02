@@ -4,6 +4,7 @@ import React, { startTransition, useTransition } from 'react'
 import Card from './card';
 import { useRouter } from 'next/navigation';
 import { upsertUserProgress } from '@/actions/user-progress';
+import { toast } from 'sonner';
 type props ={
     courses : typeof courses.$inferSelect[];
     activeCourseId? : typeof userProgress.$inferSelect.activeCourseId;
@@ -18,7 +19,7 @@ export const List = ({courses, activeCourseId} : props) => {
     return router.push("/learn");
 
     startTransition(() => {
-      upsertUserProgress(id);
+      upsertUserProgress(id).catch(() => toast.error("Something went Wrong"))
     })
   }
   return (

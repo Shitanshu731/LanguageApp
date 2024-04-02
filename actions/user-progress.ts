@@ -20,7 +20,6 @@ export const upsertUserProgress = async (courseId:number) => {
     if(!course){
         throw new Error("Course not found");
     }
-
     const existingUserProgress = await getUserProgress();
 
     if(existingUserProgress){
