@@ -1,10 +1,10 @@
 "use client"
-import { courses } from '@/db/schema'
+import { courses, userProgress } from '@/db/schema'
 import React from 'react'
 import Card from './card';
 type props ={
     courses : typeof courses.$inferSelect[];
-    activeCourseId : number;
+    activeCourseId? : typeof userProgress.$inferSelect.activeCourseId;
 }
 export const List = ({courses, activeCourseId} : props) => {
   return (
