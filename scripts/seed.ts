@@ -19,7 +19,22 @@ const main = async () => {
                 id: 1,
                 title : "spanish",
                 imageSrc : "/es.svg"
-            }
+            },
+            {
+                id: 2,
+                title : "Croatian",
+                imageSrc : "/hr.svg"
+            },
+            {
+                id: 3,
+                title : "French",
+                imageSrc : "/fr.svg"
+            },
+            {
+                id: 4,
+                title : "Italian",
+                imageSrc : "/it.svg"
+            },
         ])
         console.log("seeding Finished");
     }
