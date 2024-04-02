@@ -14,7 +14,14 @@ const main = async () => {
         console.log("seeding started")
         await db.delete(schema.courses);
         await db.delete(schema.userProgress);
-        console.log("seeding done")
+        await db.insert(schema.courses).values([
+            {
+                id: 1,
+                title : "spanish",
+                imageSrc : "/es.svg"
+            }
+        ])
+        console.log("seeding Finished");
     }
     catch(error) {
         throw new Error("Failed to seed the data base")
