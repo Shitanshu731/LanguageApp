@@ -8,17 +8,20 @@ import { redirect } from "next/navigation";
 
 const page = async () => {
   const userProgress = await getUserProgress();
-  if(!userProgress || !userProgress.activeCourseId) redirect("/courses")
+  if(!userProgress || !userProgress.activeCourseId) {
+    redirect("/courses")
+  }
   return (
     <div className="flex flex-row-reverse gap-[48px] px-6 ">
       <StickyWrapper>
-        <UserProgress activeCourse={userProgress.activeCourse}
+        <UserProgress 
+        activeCourse={userProgress.activeCourse}
         hearts={userProgress.hearts}
         points={userProgress.points}
         hasActiveSubscription={false} />
       </StickyWrapper>
       <FeedWrapper>
-        <Header title="spanish" />
+        <Header title={userProgress.activeCourse!.title} />
       </FeedWrapper>
     </div>
   );
