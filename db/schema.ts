@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { integer, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const courses = pgTable("courses",{
     id : serial("id").primaryKey(),
@@ -54,6 +54,15 @@ export const challengesRelations = relations(challenges, ({one,many}) => ({
         references : [lessons.id],
     })
 }))
+
+export const challengeOptions = pgTable("challengeOptions", {
+    id: serial("id").primaryKey(),
+    challengeId : integer("challenge_id").references(() => challenges.id , {onDelete : "cascade"}).notNull(),
+    text : text("text").notNull(),
+    correct : boolean("text").notNull(),
+    imageSrc : text("image_src"),
+    audioSrc : text("audio_src")
+}) 
 
 export const coursesRelations = relations(courses, ({many}) => ({
     userProgress : many(userProgress),
