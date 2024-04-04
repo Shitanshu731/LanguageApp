@@ -62,7 +62,14 @@ export const challengeOptions = pgTable("challengeOptions", {
     correct : boolean("text").notNull(),
     imageSrc : text("image_src"),
     audioSrc : text("audio_src")
-}) 
+})
+
+export const challengeOptionsRelations = relations(challengeOptions, ({one}) => ({
+    challenge : one(challenges, {
+        fields : [challengeOptions.challengeId],
+        references : [challenges.id],
+    })
+}))
 
 export const coursesRelations = relations(courses, ({many}) => ({
     userProgress : many(userProgress),
