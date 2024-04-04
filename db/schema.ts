@@ -47,6 +47,13 @@ export const challenges = pgTable("challenges", {
     order : integer("order").notNull()
 }) 
 
+export const challengesRelations = relations(challenges, ({one,many}) => ({
+    lesson: one(lessons, {
+        fields : [challenges.lessonId],
+        references : [lessons.id],
+    })
+}))
+
 export const coursesRelations = relations(courses, ({many}) => ({
     userProgress : many(userProgress),
 }))
