@@ -3,11 +3,12 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import React from "react";
 import Header from "./header";
 import { UserProgress } from "@/components/user-progress";
-import { getUserProgress } from "@/db/query";
+import { getUnits, getUserProgress } from "@/db/query";
 import { redirect } from "next/navigation";
 
 const page = async () => {
   const userProgress = await getUserProgress();
+  const units = await getUnits();
   if(!userProgress || !userProgress.activeCourseId) {
     redirect("/courses")
   }
@@ -22,6 +23,11 @@ const page = async () => {
       </StickyWrapper>
       <FeedWrapper>
         <Header title={userProgress.activeCourse!.title} />
+        {units.map((unit) => (
+          <div key={unit.id}>
+            {JSON.stringify(unit)}
+          </div>
+        ))}
       </FeedWrapper>
     </div>
   );
