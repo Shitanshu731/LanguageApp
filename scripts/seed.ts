@@ -57,6 +57,15 @@ await db.insert(schema.lessons).values([
         order : 1,
     }
 ])
+await db.insert(schema.challenges).values([
+    {
+        id: 1,
+        lessonId : 1,
+        type : "SELECT",
+        order : 1,
+        question : 'Which one of these is "the man"'
+    }
+])
         console.log("seeding Finished");
     }
     catch(error) {
