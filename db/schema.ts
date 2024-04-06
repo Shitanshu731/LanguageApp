@@ -59,12 +59,12 @@ export const challengesRelations = relations(challenges, ({one,many}) => ({
 
 export const challengeOptions = pgTable("challenge_options", {
     id: serial("id").primaryKey(),
-    challengeId : integer("challenge_id").references(() => challenges.id , {onDelete : "cascade"}).notNull(),
-    text : text("text").notNull(),
-    correct : boolean("text").notNull(),
-    imageSrc : text("image_src"),
-    audioSrc : text("audio_src")
-})
+    challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: "cascade" }).notNull(),
+    text: text("text").notNull(),
+    correct: boolean("correct").notNull(),
+    imageSrc: text("image_src"),
+    audioSrc: text("audio_src"),
+  });
 
 export const challengeOptionsRelations = relations(challengeOptions, ({one}) => ({
     challenge : one(challenges, {
