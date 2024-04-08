@@ -55,6 +55,12 @@ const main = async () => {
         title: "Nouns",
         order: 1,
       },
+      {
+        id: 2,
+        unitId: 1,
+        title: "Verbs",
+        order: 1,
+      },
     ]);
     await db.insert(schema.challenges).values([
       {
