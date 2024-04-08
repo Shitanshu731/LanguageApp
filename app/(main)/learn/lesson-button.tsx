@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Crown, Star } from "lucide-react";
+import Link from "next/link";
 
 type props ={
     id:number;
@@ -38,8 +39,11 @@ export const LessonButton = ({id,index,totalCount,locked,current,percentage}: pr
     const href = isCompleted? `/lesson/${id}` : "/lesson";
 
     return (
-        <div>
+        <Link href={href} aria-disabled={locked} style={{pointerEvents: locked ? "none" : "auto"}} >
+            <div className="relative" style={{right : `${rightPosition}px`, marginTop : isFirst && !isCompleted? 60 : 40}}>
+
+            </div>
             {id} 
-        </div>
+        </Link>
     )
 }
