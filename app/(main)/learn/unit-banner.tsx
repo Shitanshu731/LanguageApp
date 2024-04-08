@@ -7,7 +7,7 @@ type props = {
     description : string;
 }
 
-export const UnitBannrt = ({title, description} : props) => {
+export const UnitBanner = ({title, description} : props) => {
     return (
         <div className="w-full rounded-xl bg-green-500 p-5 text-white flex flex-white items-center justify-between">
             <div className="space-y-2.5">
