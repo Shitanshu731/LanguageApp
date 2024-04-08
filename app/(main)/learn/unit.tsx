@@ -1,3 +1,5 @@
+import { UnitBannrt } from "./unit-banner";
+
 type props = {
     id:number;
     order: number;
@@ -12,10 +14,10 @@ type props = {
     activeLessonPercentage : number;
     
 }
-export  const unit = ({} : props) => {
+export  const Unit = ({title,description} : props) => {
   return (
     <div>
-      
+      <UnitBannrt title={title} description={description}/>
     </div>
   )
 }
