@@ -1,3 +1,4 @@
+import { LessonButton } from "./lesson-button";
 import { UnitBanner } from "./unit-banner";
 
 type props = {
@@ -23,7 +24,14 @@ export  const Unit = ({id,order,lessons,activeLesson,activeLessonPercentage,titl
             const isCurrent = lesson.id === activeLesson?.id;
             const isLocked = !lesson.completed && !isCurrent;
             return(
-                <LessonButton />
+                <LessonButton key={lesson.id}
+                id={lesson.id}
+                index={index}
+                totalCount={lessons.length - 1}
+                current = {isCurrent}
+                locked = {isLocked}
+                percentage={activeLessonPercentage}
+                 />
             )
         })}
 
