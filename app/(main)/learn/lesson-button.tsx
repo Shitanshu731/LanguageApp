@@ -1,4 +1,7 @@
 "use client";
+
+import { Check, Crown, Star } from "lucide-react";
+
 type props ={
     id:number;
     index:number;
@@ -24,9 +27,19 @@ export const LessonButton = ({id,index,totalCount,locked,current,percentage}: pr
         indentationLevel = cycleIndex - 8;
     }
 
+    
+    const rightPosition = indentationLevel * 40;
+
+    const isFirst = index === 0;
+    const isLast = index === totalCount;
+    const isCompleted = !current && !locked;
+
+    const Icon = isCompleted ? Check : isLast ? Crown : Star;
+    const href = isCompleted? `/lesson/${id}` : "/lesson";
+
     return (
         <div>
-             
+            {id} 
         </div>
     )
 }
