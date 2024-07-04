@@ -1,7 +1,13 @@
 import { cache } from "react";
 import db from "./drizzle";
 import { auth } from "@clerk/nextjs";
-import { challengeProgress, courses, units, userProgress } from "@/db/schema";
+import {
+  challengeProgress,
+  courses,
+  lessons,
+  units,
+  userProgress,
+} from "@/db/schema";
 import { eq } from "drizzle-orm";
 import e from "express";
 
@@ -102,10 +108,14 @@ export const getCourseProgress = cache(async () => {
   const firstuncompletedLesson = unitsInActiveCourse
     .flatMap((unit) => unit.lessons)
     .find((lesson) => {
+      //
       return lesson.challenges.some((challenge) => {
         return (
           !challenge.challengeProgress ||
-          challenge.challengeProgress.length === 0
+          challenge.challengeProgress.length === 0 ||
+          challenge.challengeProgress.some(
+            (progress) => progress.completed === false
+          )
         );
       });
     });
@@ -114,4 +124,41 @@ export const getCourseProgress = cache(async () => {
     acctiveLesson: firstuncompletedLesson,
     activeLessonId: firstuncompletedLesson?.id,
   };
+});
+
+export const getLesson = cache(async (id?: number) => {
+  const { userId } = await auth();
+  if (!userId) return null;
+  const courseProgress = await getCourseProgress();
+  const lessonId = id || courseProgress?.activeLessonId;
+  if (!lessonId) {
+    return null;
+  }
+
+  const data = await db.query.lessons.findFirst({
+    where: eq(lessons.id, lessonId),
+    with: {
+      challenges: {
+        orderBy: (challanges, { asc }) => [asc(challanges.order)],
+        with: {
+          challengeOptions: true,
+          challengeProgress: {
+            where: eq(challengeProgress.userId, userId),
+          },
+        },
+      },
+    },
+  });
+  if (!data || !data.challenges) {
+    return null;
+  }
+
+  const normalizedChallemges = data.challenges.map((challenge) => {
+    const completed =
+      challenge.challengeProgress &&
+      challenge.challengeProgress.length > 0 &&
+      challenge.challengeProgress.every((progress) => progress.completed);
+    return { ...challenge, completed };
+  });
+  return { ...data, challenges: normalizedChallemges };
 });
